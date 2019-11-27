@@ -48,17 +48,18 @@ public class MainActivity extends AppCompatActivity {
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int count = 0;
+                List<WeatherModel> lstDel = new ArrayList<>();
                 for (int i = 0; i < weathers.size(); i++){
                     View view = lvWearther.getChildAt(i);
                     CheckBox chk = view.findViewById(R.id.chkTick);
                     if (chk.isChecked()){
-                        weathers.remove(i);
-                        count++;
+                        Log.d("XXX", "Delete: " + i);
+                        lstDel.add(weathers.get(i));
                     }
                 }
+                weathers.removeAll(lstDel);
                 weatherAdapter.notifyDataSetChanged();
-                Toast.makeText(getApplicationContext(),"Delete " + count, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Delete " + lstDel.size(), Toast.LENGTH_SHORT).show();
             }
         });
     }
